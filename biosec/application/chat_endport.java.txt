@@ -1,0 +1,9 @@
+// Using javax.websocket.ContainerProvider.getWebSocketContainer()
+@ClientEndpoint
+public class ChatClient {
+    Session session;
+    @OnOpen public void onOpen(Session s){ session=s; }
+    @OnMessage public void onMessage(String msg){ System.out.println("RECV: "+msg);}
+    // send JSON via session.getAsyncRemote().sendText(...)
+}
+

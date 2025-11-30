@@ -1,0 +1,1 @@
+savedcmd_../../bin/driver/xctl10.ko := ld -r -m elf_x86_64 -z noexecstack --no-warn-rwx-segments --build-id=sha1  -T /usr/src/linux-headers-6.13.5-lexne/scripts/module.lds -o ../../bin/driver/xctl10.ko ../../bin/driver/xctl10.o ../../bin/driver/xctl10.mod.o .module-common.o

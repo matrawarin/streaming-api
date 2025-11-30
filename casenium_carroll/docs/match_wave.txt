@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
+
+#define SAMPLE_SIZE 1024
+#define NUM_RECORDS 100
+
+// Simulate sound wave as an array of floats
+typedef struct {
+    int id;
+    float waveform[SAMPLE_SIZE];
+} SoundRecord;
+
+// Simulated database of sound waves
+SoundRecord database[NUM_RECORDS];
+
+// Populate the database with mock data
+void populate_database() {
+    for (int i = 0; i < NUM_RECORDS; i++) {
+        database[i].id = i;
+        for (int j = 0; j < SAMPLE_SIZE; j++) {
+            database[i].waveform[j] = sin(2 * M_PI * j / SAMPLE_SIZE + i * 0.1); // Varied sine waves
+        }
+    }
+}
+
+// Compare two waveforms using Euclidean distance
+float compare_waveforms(float *a, float *b) {
+    float sum = 0.0f;
+    for (int i = 0; i < SAMPLE_SIZE; i++) {
+        float diff = a[i] - b[i];
+        sum += diff * diff;
+    }
+    return sqrt(sum);
+}
+
+// Process the data for accuracy and similarity
+void process_data(float *target_waveform) {
+    float best_match_score = INFINITY;
+    int best_match_id = -1;
+
+    for (int i = 0; i < NUM_RECORDS; i++) {
+        float score = compare_waveforms(target_waveform, database[i].waveform);
+
+        // Brain-like "decision": choose most similar waveform
+        if (score < best_match_score) {
+            best_match_score = score;
+            best_match_id = database[i].id;
+        }
+    }
+
+    printf("Best match ID: %d with score: %.4f\n", best_match_id, best_match_score);
+}
+
+int main() {
+    // Step 1: Populate mock database
+    populate_database();
+
+    // Step 2: Simulate an incoming waveform to compare
+    float test_waveform[SAMPLE_SIZE];
+    for (int i = 0; i < SAMPLE_SIZE; i++) {
+        test_waveform[i] = sin(2 * M_PI * i / SAMPLE_SIZE + 0.25); // Slightly offset sine wave
+    }
+
+    // Step 3: Process data to find the most similar record
+    process_data(test_waveform);
+
+    return 0;
+}

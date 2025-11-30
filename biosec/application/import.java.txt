@@ -1,0 +1,7 @@
+HttpsURLConnection conn = SSLConnection.getSecureConnection("https://your-server.com/api/login");
+conn.setRequestMethod("GET");
+
+InputStream in = conn.getInputStream();
+BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+System.out.println(reader.readLine());
+
