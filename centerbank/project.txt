@@ -1,0 +1,17 @@
+centralbank/
+├── main.c
+├── ledger.c
+├── ledger.h
+├── account.c
+├── account.h
+├── transaction.c
+├── transaction.h
+├── crypto.c
+├── crypto.h
+├── db.c
+├── db.h
+├── audit.c
+├── audit.h
+├── Makefile
+└── database.db   (auto-create)
+
